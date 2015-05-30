@@ -7,7 +7,13 @@
 
 ##--------- 1. working directory wd
 # setear wd
+
+wd0 <- "C:/Users/lerazo/Documents/Clases_R/R-Nivel-Basico"
+setwd(dir=wd0)
+getwd()
+
 wd0 <- "C:/Users/Toshiba/Desktop/readr_files_05"
+wd0 <- getwd()
 setwd(dir = wd0)
 
 # obtencion de wd
@@ -17,7 +23,7 @@ getwd()
 list.files()
 list.files(pattern = ".Rmd")
 
-wd1 <- "C:/Users/Toshiba/Desktop/readr_files_05/read_data"
+wd1 <- "C:/Users/lerazo/Documents/Clases_R/R-Nivel-Basico/read_data"
 setwd(dir = wd1)
 list.files()
 list.files(pattern = ".txt")
@@ -41,6 +47,7 @@ data_txt1 <- read.table(file = "data_read.txt",sep = "\t", dec = ",", header = T
 str(data_txt1)
 View(data_txt1)
 
+attributes(data_txt1)
 names(data_txt1)
 class(data_txt1)
 dim(data_txt1)
@@ -50,10 +57,9 @@ nrow(data_txt1)
 summary(data_txt1)
 
 # Variables categóricas como character
-data_txt2 <- read.table(file = "data_read.txt",sep = "\t", dec = ",", 
-                       header = TRUE, stringsAsFactors = FALSE)
+data_txt2 <- read.table(file = "data_read.txt",sep = "\t", dec = ",",header = TRUE, stringsAsFactors = FALSE)
 str(data_txt2)
-
+View(data_txt2)
 
 # archivo formato csv
 data_csv <- read.table(file = "data_read.csv",sep = ",", dec = ".", header = TRUE)
@@ -78,12 +84,13 @@ str(data_csv2)
 
 # archivo formato xlsx
 # install.packages("readxl", dependencies = TRUE)
+install.packages("readxl", dependencies = TRUE)
 library(readxl)
 ls("package:readxl")
 # lista de las hojas del libro "data_read.xlsx"
 excel_sheets(path = file.path(wd1, "data_read.xlsx"))
 
-data_xlsx <- read_excel("data_read.xlsx",sheet = "datos",col_names = TRUE, na="")
+data_xlsx <- read_excel("data_read.xlsx",sheet = "datos",col_names = TRUE, na=C("","#NULL","#NA"))
 str(data_xlsx)
 
 
@@ -97,7 +104,7 @@ system.time(data_sav1 <- read.spss("data_read.sav", use.value.labels = TRUE,
 str(data_sav1)
 
 
-# install.packages("haven", dependencies = TRUE)
+install.packages("haven", dependencies = TRUE)
 # spss: read_spss(), sas: read_sas(), stata: read_dta()
 library(haven)
 ls("package:haven")
@@ -124,12 +131,13 @@ str(data_dbx)
 ## Descargar archivos desde tablas html
 library(RCurl)
 library(XML)
-# install.packages("RCurl", dependencies = TRUE)
-# install.packages("XML", dependencies = TRUE)
+install.packages("RCurl", dependencies = TRUE)
+install.packages("XML", dependencies = TRUE)
 # http://www.sbs.gob.ec/practg/sbs_index?vp_art_id=&vp_tip=6&vp_buscr=/practg/pk_cons_bdd.p_bal_entdd_finnc
-cod_inst=1028
-cod_mes=11
-cod_anio=2010
+cod_inst<-1028
+cod_mes<-11
+cod_anio<-2010
+paste("Curso","R","Basico",1:5,sep="")
 base_url <- paste('http://www.sbs.gob.ec/practg/pk_cons_bdd.p_bal_entdd_finnc?vp_cod_tip_instt=3&vp_cod_instt=',
                   cod_inst,'&vp_anio=', cod_anio, '&vp_mes=', cod_mes, '&vp_cod_tip_catlg=14')
 table_url <- readHTMLTable(base_url)
@@ -195,7 +203,7 @@ edad1 <- edad[-c(1,25,51)]
 length(edad)
 length(edad1)
 # eliminar los primeros 1000 elementos de edad y asignar a edad1
-edad1 <- edad[-c(1,25,51)]
+edad1 <- edad[-1:-1000]
 length(edad)
 length(edad1)
 
@@ -408,7 +416,7 @@ hist(edad)
 hist(edad,breaks = 50)
 hist(edad,breaks = 50, xlab = "Edad", ylab="Frecuencia", main="Histograma de Edad")
 hist(edad,breaks = 50, xlab = "Edad", ylab="Frecuencia", main="Histograma de Edad",
-     col="steelblue", border="gray60")
+     col="steelblue", border="gray10")
 
 # Diagrama de cajas
 boxplot(edad)
@@ -426,7 +434,7 @@ plot(edad, Score, xlab = "Edad", ylab="Score", main="Score vs Edad")
 plot(edad, Score, xlab = "Edad", ylab="Score", main="Score vs Edad",
      pch=20)
 plot(edad, Score, xlab = "Edad", ylab="Score", main="Score vs Edad",
-     pch=18, col="steelblue")
+     pch=1, col="steelblue")
 
 # Diagrama de barras
 tipviv <- data_txt[,"Vivienda"]
